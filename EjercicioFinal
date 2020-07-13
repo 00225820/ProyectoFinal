@@ -6,7 +6,7 @@ const int longCad = 20;
 
 using namespace std;
 
-struct costoPorArticulo
+struct costoPorArticulo //estructura dada
 {
     char nombreArticul[longCad + 1];
     int cantidad;
@@ -15,16 +15,16 @@ struct costoPorArticulo
 };
 
 
-void datos (costoPorArticulo Total[], int cant_articulos)
+void PARTICULARIDADES(costoPorArticulo Total[], int cant_articulos) // Funcion, para poder recibir datos particulares del producto
 {
-    string art;
+    string nom;
     for (int i = 0; i < cant_articulos; i++)
     {
         cout << "NOMBRE DEL PRODUCTO: " << endl;
-        getline(cin, art, '\n');
-        strncpy(Total[i].nombreArticul, art.c_str( ), longCad);
+        getline(cin, nom, '\n');
+        strncpy(Total[i].nombreArticul, nom.c_str( ), longCad);
         Total[i].nombreArticul[longCad]='\0';
-        cout << "CANTIDAD A LLEVAR DEL PRODUCTO " << art << ":" << endl;
+        cout << "CANTIDAD A LLEVAR DEL PRODUCTO " << nom << ":" << endl;
         cin >> Total[i].cantidad;
         cout << "COSTO DEL PRODUCTO:" << endl;
         cin >> Total[i].precio;
@@ -32,15 +32,15 @@ void datos (costoPorArticulo Total[], int cant_articulos)
     }
     
 }
-float costo(costoPorArticulo Total[], int cant_articulos)
+float PROCEDIMIENTO(costoPorArticulo Total[], int cant_articulos) //Funcion dada para ejecutar la operación que determina el costro total de los articulos
 {
    for (int i = 0; i < cant_articulos; i++)
    {
-       Total[i].costoPorArticulo = Total[i].precio * Total[i].cantidad;
+       Total[i].costoPorArticulo = Total[i].precio * Total[i].cantidad; //Precio*Cantidad
     }
   
 }
-void mostrar(costoPorArticulo Total[], int cant_articulos)
+void CANTIDAD_DE_PRODUCTOS(costoPorArticulo Total[], int cant_articulos)//Funcion que procesa la cantidad de productos diferentes y los muestra con el respectivo costo
 {
     cout << "Productos diferentes totales diferentes que lleva: " << cant_articulos << endl;
     for (int i = 0; i < cant_articulos; i++)
@@ -50,7 +50,7 @@ void mostrar(costoPorArticulo Total[], int cant_articulos)
     }
     
 }
-float total(costoPorArticulo Total[], int cant_articulos)
+float TOTALDECOMPRA(costoPorArticulo Total[], int cant_articulos) //Funcion para la realización del total comprado
 {
     float total;
     total = 0;
@@ -62,17 +62,18 @@ float total(costoPorArticulo Total[], int cant_articulos)
     return total;
 }
 
-int main ()
+int main () 
 {
     int cant_articulos; 
     cout << "TIENDA LA DIVINA PROVIDENCIA" << endl;
     cout << "Por favor digite cuantos distintos articulos lleva: " << endl;
     cin >> cant_articulos;
     cin.ignore(100, '\n');   
-    costoPorArticulo Total[cant_articulos];
-    datos(Total, cant_articulos);
-    costo(Total, cant_articulos);
-    mostrar(Total, cant_articulos);
-    cout << "TOTAL A PAGAR: $" << total(Total, cant_articulos) << endl;
+    costoPorArticulo Total[cant_articulos]; 
+    PARTICULARIDADES(Total, cant_articulos);
+    PROCEDIMIENTO(Total, cant_articulos);
+    CANTIDAD_DE_PRODUCTOS(Total, cant_articulos);
+    cout << "TOTAL A PAGAR: $" << TOTALDECOMPRA(Total, cant_articulos) << endl;
+    //llamada de funciones
     return 0;
 }
